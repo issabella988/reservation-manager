@@ -1,69 +1,32 @@
-package org.loose.fis.reservation.manager.model;
+package org.loose.fis.reservation.manager;
 
-import java.util.Objects;
-import java.util.UUID;
+        import org.loose.fis.reservation.manager.model.Reservation;
+        import org.loose.fis.reservation.manager.model.User;
 
-public class User {
-    private String id;
-    private String firstName;
-    private String lastName;
+        import java.util.Arrays;
+        import java.util.List;
 
-    private int age;
-    private boolean isOwner;
+public class Main {
+    public static void main(String[] args) {
+        User user1 = new User("John", "Doe", 43);
+        User user2 = new User("Angelina", "Clooney", 25);
+        User user3 = new User("George", "Jackson", 58);
+        User user4 = new User("Francesca", "Jolie", 19);
 
-    public User(String firstName, String lastName, int age) {
-        id = UUID.randomUUID().toString();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
+        List<Reservation> reservations = createReservations(user1, user2, user3, user4);
+
+        reservations.forEach(System.out::println);
     }
 
-    @Override public String toString() {
-        return "User{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + '}';
-    }
+    private static List<Reservation> createReservations(User user1, User user2, User user3, User user4) {
+        Reservation reservation1 = new Reservation(user1, "I would like to make a dentists' appointment.");
+        Reservation reservation2 = new Reservation(user2, "I would like to make a reservation for a nice restaurant.");
+        Reservation reservation3 = new Reservation(user4, "I would like to make an appointment at a nail salon.");
+        Reservation reservation4 = new Reservation(user1, "I would like to make a reservation at the best ice cream place in town.");
+        Reservation reservation5 = new Reservation(user3, "I would like to go to a concert.");
+        Reservation reservation6 = new Reservation(user4, "I would like to get my make up done.");
+        Reservation reservation7 = new Reservation(user2, "I would like to make a reservation at the closest movie theater.");
 
-    @Override public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public boolean isOwner() {
-        return isOwner;
-    }
-
-    public void setOwner(boolean owner) {
-        isOwner = owner;
+        return Arrays.asList(reservation1, reservation2, reservation3, reservation4, reservation5, reservation6, reservation7);
     }
 }
